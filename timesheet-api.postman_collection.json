@@ -1,0 +1,60 @@
+{
+    "info": {
+        "name": "Timesheet API",
+        "description": "Timesheet API collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Create Time Entry",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"userId\": \"siva123\", \"date\": \"2024-06-12T00:00:00Z\", \"hours\": 8, \"description\": \"Worked on project Telstra\"}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/api/time-entry",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3000",
+                    "path": ["api", "time-entry"]
+                }
+            }
+        },
+        {
+            "name": "Retrieve Time Entries",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/time-entry/siva123",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3000",
+                    "path": ["api", "time-entry", "siva123"]
+                }
+            }
+        },
+        {
+            "name": "Calculate Capacity",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/capacity/siva123/week",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3000",
+                    "path": ["api", "capacity", "siva123", "week"]
+                }
+            }
+        }
+    ]
+}

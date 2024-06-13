@@ -1,0 +1,106 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Timesheet API",
+        "description": "Timesheet API documentation"
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": ["http"],
+    "paths": {
+        "/time-entry": {
+            "post": {
+                "summary": "Create a new time entry",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "timeEntry",
+                        "schema": {
+                            "$ref": "#/definitions/TimeEntry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Time entry created"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/time-entry/{userId}": {
+            "get": {
+                "summary": "Retrieve time entries",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of time entries"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/capacity/{userId}/{period}": {
+            "get": {
+                "summary": "Calculate available capacity",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "period",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "enum": ["week", "month", "quarter"]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Capacity hours"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "TimeEntry": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "hours": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": ["userId", "date", "hours"]
+        }
+    }
+}
